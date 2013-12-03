@@ -1,0 +1,89 @@
+.header
+  ul.nav.nav-pills.pull-right
+    li.active
+      a(ng-href='#') Home
+    li
+      a(ng-href='#') About
+    li
+      a(ng-href='#') Contact
+  h3.text-muted astrosonnetApp
+.jumbotron
+  h1 Astro, Sonnet!
+div.main-content
+  div.content-area
+    form(action='', method='POST', role='form')
+      legend Birth Details
+      .form-group
+        label(for='fullname') Name
+        input.form-control(id='fullname', type='text', placeholder='Enter your name')
+
+        label(for='birthDate') Date of Birth
+        input.form-control(id='birthDate', type='date', placeholder='When were you born?')
+
+        label(for='birthTime') Time of Birth
+        input.form-control(id='birthTime', type='time', placeholder='Exactly when?')
+
+        label(for='select-state') State of Birth
+        select(name="",id="select-state",selectize="{}").form-control 
+          option(value="") Select a state...
+          option(value="AL") Alabama
+          option(value="AK") Alaska
+          option(value="AZ") Arizona
+          option(value="AR") Arkansas
+          option(value="CA") California
+          option(value="CO") Colorado
+          option(value="CT") Connecticut
+          option(value="DE") Delaware
+          option(value="DC") District of Columbia
+          option(value="FL") Florida
+          option(value="GA") Georgia
+          option(value="HI") Hawaii
+          option(value="ID") Idaho
+          option(value="IL") Illinois
+          option(value="IN") Indiana
+          option(value="IA") Iowa
+          option(value="KS") Kansas
+          option(value="KY") Kentucky
+          option(value="LA") Louisiana
+          option(value="ME") Maine
+          option(value="MD") Maryland
+          option(value="MA") Massachusetts
+          option(value="MI") Michigan
+          option(value="MN") Minnesota
+          option(value="MS") Mississippi
+          option(value="MO") Missouri
+          option(value="MT") Montana
+          option(value="NE") Nebraska
+          option(value="NV") Nevada
+          option(value="NH") New Hampshire
+          option(value="NJ") New Jersey
+          option(value="NM") New Mexico
+          option(value="NY") New York
+          option(value="NC") North Carolina
+          option(value="ND") North Dakota
+          option(value="OH") Ohio
+          option(value="OK") Oklahoma
+          option(value="OR") Oregon
+          option(value="PA") Pennsylvania
+          option(value="RI") Rhode Island
+          option(value="SC") South Carolina
+          option(value="SD") South Dakota
+          option(value="TN") Tennessee
+          option(value="TX") Texas
+          option(value="UT") Utah
+          option(value="VT") Vermont
+          option(value="VA") Virginia
+          option(value="WA") Washington
+          option(value="WV") West Virginia
+          option(value="WI") Wisconsin
+          option(value="WY") Wyoming
+
+        label(for='select-city') City of Birth
+        select(name="",id="select-city",ng-model="selectedValue",ng-options="val for val in getAvailableCities")
+          option(value="") Select a city...
+
+
+      button.btn.btn-primary(type='submit') Submit
+.footer
+  p ♥ from the Yeoman team
+
