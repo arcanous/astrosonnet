@@ -5,7 +5,7 @@ angular.module('astrosonnetApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'theaquaNg'
+  'angular-selectize'
 ])
   .config ($routeProvider, $locationProvider) ->
     $routeProvider

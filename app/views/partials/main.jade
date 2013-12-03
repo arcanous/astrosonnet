@@ -24,7 +24,7 @@ div.main-content
         input.form-control(id='birthTime', type='time', placeholder='Exactly when?')
 
         label(for='select-state') State of Birth
-        select(name="",id="select-state",selectize="{}").form-control 
+        select(state-samples="",name="",id="select-state",selectize="{}").form-control 
           option(value="") Select a state...
           option(value="AL") Alabama
           option(value="AK") Alaska
@@ -77,9 +77,10 @@ div.main-content
           option(value="WV") West Virginia
           option(value="WI") Wisconsin
           option(value="WY") Wyoming
+          
 
         label(for='select-city') City of Birth
-        select(name="",id="select-city",ng-model="selectedValue",ng-options="val for val in getAvailableCities")
+        select(name="",id="select-city",ng-model="selectedValue",ng-options="val.name for val in getAvailableCities")
           option(value="") Select a city...
 
 

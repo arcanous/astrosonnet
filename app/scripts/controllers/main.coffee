@@ -1,11 +1,7 @@
 'use strict'
 
 angular.module('astrosonnetApp')
-  .factory 'geoService', ($http) ->
-     return {getCities: ((state) ->
-        return $http.get("http://api.sba.gov/geodata/city_county_links_for_state_of/#{state}.json"))
-      }
-  .controller 'MainCtrl', ($scope, $http, geoService) ->
+  .controller 'MainCtrl', ($scope, $http) ->
     data = 
       year: 1987
       month: 9
@@ -20,12 +16,10 @@ angular.module('astrosonnetApp')
 
     $http.post('/api/chart', data).success (chartData) ->
       console.log(chartData)
+
+    #$scope.$watch 'getAvailableCities', (newValue, oldValue) ->
+
     #$http.get('/api/awesomeThings').success (awesomeThings) ->
     #  $scope.awesomeThings = awesomeThings
 
-    $(document).on 'change', '#select-state', (e) ->
-      return {} unless e.target.value.length
-
-      geoService.getCities(e.target.value).then (result) ->
-        $scope.selectedValue = null
-        $scope.getAvailableCities = [city.name for city in result.data][0]
+    
