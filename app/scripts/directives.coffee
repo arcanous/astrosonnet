@@ -1,5 +1,5 @@
 angular.module('astrosonnetApp')
-.directive 'stateSamples', ['geoService', (geoService) ->
+.directive('stateSamples', ['geoService', (geoService) ->
   return {
       restrict: 'A',
       link: (scope, element, attrs) ->
@@ -8,5 +8,13 @@ angular.module('astrosonnetApp')
           return {} unless e.target.value.length
           _geoService.getCities(e.target.value).then (result) ->
             scope.getAvailableCities = [city for city in result.data][0]
-            scope.selectedValue = null
-  }]
+            scope.state = e.target.value
+  }])
+.directive('citySamples', ->
+  return {
+      restrict: 'A',
+      link: (scope, element, attrs) ->
+        scope.$watch 'state', (newValue, oldValue) ->
+          unless newValue
+            return
+  })
