@@ -11,36 +11,31 @@
   h1 Astro, Sonnet!
 div.main-content
   div.content-area
-    form(astro-form="", id='astroForm', method='POST', role='form', novalidate='')
+    form(ng-submit="astroSubmit()")
       legend Birth Details
       .form-group
-        label(for='firstName') Name
-        input.form-control(name='firstName', type='text', placeholder='Enter your name')
+        label(for='firstName') First Name
+        input.form-control(data-ng-model="data.firstName", name='firstName',
+          type='text', placeholder='Whom do we have the pleasure of working with?')
 
         label(for='birthDate') Time of Birth
         div.dropdown
           a.dropdown-toggle(id="dropdown2", role="button", data-toggle="dropdown", data-target="#", href="#")
             div.input-group
-              input.input-large(type="text", data-ng-model="data.dateDropDownInput").form-control
+              input.input-large(type="text", data-date-time-input="MMM/DD/YYYY hh:mm A", 
+                placeholder="When did you show up?", data-ng-model="data.birthDate").form-control
               span.input-group-addon
                 i.glyphicon.glyphicon-calendar
           ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
-            datetimepicker(data-ng-model="data.dateDropDownInput", data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }")
-
-        //-
-          label(for='birthDate') Date of Birth
-          input.form-control(name='birthDate', type='date', placeholder='When were you born?')
-
-          label(for='birthTime') Time of Birth
-          input.form-control(name='birthTime', type='time', placeholder='Exactly when?')
+            datetimepicker(data-ng-model="data.birthDate", data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }")
 
         label(for='state') State of Birth
-        select(chosen="",state-samples="",name=state,id="select-state",ng-model="state",ng-required="true",
+        select(chosen="",state-samples="",name=state,id="select-state",data-ng-model="data.state",ng-required="true",
           ng-options="state for (code, state) in states",data-placeholder=" Select a state...").form-control
           option(value="")
           
         label(for='city') City of Birth
-        select(chosen="",name="city",id="select-city",ng-model="city",ng-required="true",
+        select(chosen="",name="city",id="select-city",data-ng-model="data.city",ng-required="true",
           ng-options="city.name for city in cities",data-placeholder=" Select a city...").form-control
           option(value="")
 

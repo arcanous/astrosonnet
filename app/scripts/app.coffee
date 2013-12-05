@@ -6,7 +6,8 @@ angular.module('astrosonnetApp', [
   'ngSanitize',
   'ngRoute',
   'localytics.directives',
-  'ui.bootstrap.datetimepicker'
+  'ui.bootstrap.datetimepicker',
+  'ui.dateTimeInput'
 ])
   .config ($routeProvider, $locationProvider) ->
     $routeProvider

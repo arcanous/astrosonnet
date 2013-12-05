@@ -56,24 +56,26 @@ States =
 angular.module('astrosonnetApp')
   .controller 'MainCtrl', ($scope, $http) ->
 
-    data = 
-      year: 1987
-      month: 9
-      day: 17
-      hour:  11
-      minute: 20
-      second: 0
-      timezone: 5.5
-      longitude: 78.1780
-      latitude: 26.2215
-      altitude: 0
-
-    $http.post('/api/chart', data).success (chartData) ->
-      console.log(chartData)
-
     $scope.states = States
-
     $scope.data = {}
+
+    $scope.astroSubmit = ->
+      birthDate = new Date(@.data.birthDate)
+
+      postData = 
+        year: birthDate.getFullYear()
+        month: birthDate.getMonth() + 1
+        day: birthDate.getDate()
+        hour:  birthDate.getHours()
+        minute: birthDate.getMinutes()
+        second: birthDate.getSeconds()
+        timezone: -7.0
+        longitude: parseFloat(@.data.city.primary_longitude)
+        latitude: parseFloat(@.data.city.primary_latitude)
+        altitude: 0
+
+      $http.post('/api/chart', postData).success (chartData) ->
+       console.log(chartData)
 
     #$scope.$watch 'getAvailableCities', (newValue, oldValue) ->
 
