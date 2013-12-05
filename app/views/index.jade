@@ -16,6 +16,7 @@ html.no-js
     
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
     <!-- endbuild -->
     //- build:head
   body(ng-app="astrosonnetApp")
@@ -62,14 +63,19 @@ html.no-js
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbuild -->
+
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+
+    <script src="bundled/chosen/chosen.jquery.js"></script>
+    <script src="bower_components/angular-chosen-localytics/chosen.js"></script>
     
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/services.js"></script>
     <script src="scripts/directives.js"></script>
+    <script src="scripts/filters.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <!-- endbuild -->
     //- build:body
 
-    <script src="bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
-    <script src="bower_components/angular-selectize/angular-selectize.js"></script>

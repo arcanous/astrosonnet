@@ -7,14 +7,20 @@ angular.module('astrosonnetApp')
         $(element).on 'change',  (e) ->
           return {} unless e.target.value.length
           _geoService.getCities(e.target.value).then (result) ->
-            scope.getAvailableCities = [city for city in result.data][0]
-            scope.state = e.target.value
+            scope.cities = [city for city in result.data][0]
   }])
-.directive('citySamples', ->
+.directive('astroForm', ['datetimeParse', (datetimeParse) ->
   return {
       restrict: 'A',
       link: (scope, element, attrs) ->
-        scope.$watch 'state', (newValue, oldValue) ->
-          unless newValue
-            return
-  })
+        $(element).on 'submit', (e) ->
+          el = $(@)
+          birthDate = el.find('input[name="birthDate"]').val()
+          birthDate = datetimeParse.getDate(birthDate)
+          console.dir(birthDate)
+
+          birthTime = el.find('input[name="birthTime"]').val()
+          birthTime = datetimeParse.getTime(birthTime)
+          console.dir(birthTime)
+
+  }])

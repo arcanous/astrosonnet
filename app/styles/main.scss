@@ -1,8 +1,7 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
-
-@import 'selectize.bootstrap3';
+@import 'bootstrap-chosen/bootstrap-chosen';
 
 .selectize-control::before {
     -moz-transition: opacity 0.2s;
