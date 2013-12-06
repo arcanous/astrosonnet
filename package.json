@@ -1,6 +1,6 @@
 {
   "name": "astrosonnet",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "dependencies": {
     "express": "~3.4.3",
     "mongoose": "~3.5.5",
@@ -53,6 +53,8 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
-  }
+    "test": "grunt test",
+    "start": "node server.js"
+  },
+  "subdomain": "astro"
 }
