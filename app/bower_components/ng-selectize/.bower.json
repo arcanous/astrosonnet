@@ -1,0 +1,16 @@
+{
+  "name": "ng-selectize",
+  "dependencies": {
+    "selectize": "~0.7.7"
+  },
+  "homepage": "https://github.com/theaqua/ng-selectize",
+  "_release": "bc87b46ee8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "bc87b46ee8005991680b21a4f4cab6419c5c4f04"
+  },
+  "_source": "git://github.com/theaqua/ng-selectize.git",
+  "_target": "*",
+  "_originalSource": "ng-selectize"
+}
