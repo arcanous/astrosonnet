@@ -1,4 +1,8 @@
 'use strict'
+Constellations = [
+  "Aries", "Taurus", "Gemini", "Cancer",
+  "Leo", "Virgo", "Libra", "Scorpio",
+  "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
 
 States =
   "AL": "Alabama"
@@ -58,6 +62,11 @@ angular.module('astrosonnetApp')
 
     $scope.states = States
     $scope.data = {}
+    $scope.data.output = {}
+
+    $scope.constellations = Constellations
+    $scope.planets = ["","","","","","","","","","","",""]
+
 
     $scope.astroSubmit = ->
       birthDate = new Date(@.data.birthDate)
@@ -71,11 +80,31 @@ angular.module('astrosonnetApp')
         second: birthDate.getSeconds()
         timezone: -7.0
         longitude: parseFloat(@.data.city.primary_longitude)
-        latitude: parseFloat(@.data.city.primary_latitude)
+        latitude: parseFloat(@.data.city.primary_latitude) 
         altitude: 0
 
-      $http.post('/api/chart', postData).success (chartData) ->
-       console.log(chartData)
+      #scope = @
+      $http.post('/api/chart', postData).success (chartData) =>
+        ascHouse = 1
+        console.log(chartData)
+
+        ascHouse = Math.floor(chartData["Ascendent"].longitude / 30)
+        @.constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
+
+        planets = []
+        for planet, data of chartData
+          constNum = Math.floor(data.longitude / 30)
+          planets[constNum] or= []
+          planets[constNum].push planet
+
+        planets = planets.slice(ascHouse).concat planets.slice(0,ascHouse)
+        @.planets = planets.map (planetsInHouse) ->
+          planetsInHouse.join(', ')
+
+        # TODO: a better way to not have holes
+        @.planets[i] or= "" for i in [0..11]
+        
+        @.data.output.url = "partials/chart.jade"
 
     #$scope.$watch 'getAvailableCities', (newValue, oldValue) ->
 

@@ -11,6 +11,8 @@
   h1 Astro, Sonnet!
 div.main-content
   div.content-area
+
+
     form(ng-submit="astroSubmit()")
       legend Birth Details
       .form-group
@@ -40,6 +42,9 @@ div.main-content
           option(value="")
 
       button.btn.btn-primary(type='submit') Submit
+
+      div.astro-chart-container
+        div.slide-animate(ng-include="data.output.url")
 .footer
   p ♥ from the Bardo.io team
 
