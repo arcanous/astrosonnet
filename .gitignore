@@ -1,7 +1,5 @@
 node_modules
-public
 .tmp
 .sass-cache
 heroku
 .DS_Store
-views

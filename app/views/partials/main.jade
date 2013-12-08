@@ -13,12 +13,12 @@ div.main-content
   div.content-area
 
 
-    form(ng-submit="astroSubmit()")
+    form(name="astroForm", ng-submit="astroForm.$valid && astroSubmit()")
       legend Birth Details
       .form-group
         label(for='firstName') First Name
         input.form-control(data-ng-model="data.firstName", name='firstName',
-          type='text', placeholder='Whom do we have the pleasure of working with?')
+          type='text', placeholder='Whom do we have the pleasure of working with?', required)
 
         label(for='birthDate') Time of Birth
         div.dropdown
@@ -29,19 +29,45 @@ div.main-content
               span.input-group-addon
                 i.glyphicon.glyphicon-calendar
           ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
-            datetimepicker(data-ng-model="data.birthDate", data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }")
+            <!-- TODO: fix required on birth date -->
+            datetimepicker(data-ng-model="data.birthDate",
+              data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }",
+              name="birthDate", ng-required="true")
 
         label(for='state') State of Birth
-        select(chosen="",state-samples="",name=state,id="select-state",data-ng-model="data.state",ng-required="true",
-          ng-options="state for (code, state) in states",data-placeholder=" Select a state...").form-control
+        select(chosen, state-samples, name="state", id="select-state", data-ng-model="data.state", required,
+          ng-options="state for (code, state) in states", data-placeholder=" Select a state...").form-control
           option(value="")
           
         label(for='city') City of Birth
-        select(chosen="",name="city",id="select-city",data-ng-model="data.city",ng-required="true",
-          ng-options="city.name for city in cities",data-placeholder=" Select a city...").form-control
+        select(chosen, city-samples, name="city", id="select-city", data-ng-model="data.city", required,
+          ng-options="city.name for city in cities", data-placeholder=" Select a city...").form-control
           option(value="")
 
       button.btn.btn-primary(type='submit') Submit
+
+      //-
+        table.table
+          tr
+            th
+            th $pristine
+            th $dirty
+            th $valid
+            th $invalid
+          
+          tr(ng-repeat="field in ['firstName', 'birthDate', 'state', 'city']")
+            td {{field}}
+            td(ng-class="getClass(astroForm[field].$pristine)" class="pristine")
+            td(ng-class="getClass(astroForm[field].$dirty)" class="dirty")
+            td(ng-class="getClass(astroForm[field].$valid)" class="valid")
+            td(ng-class="getClass(astroForm[field].$invalid)" class="invalid")
+
+          tr
+            td mainForm
+            td(ng-class="getClass(astroForm.$pristine)" class="pristine")
+            td(ng-class="getClass(astroForm.$dirty)" class="dirty")
+            td(ng-class="getClass(astroForm.$valid)" class="valid")
+            td(ng-class="getClass(astroForm.$invalid)" class="invalid")
 
       div.astro-chart-container
         div.slide-animate(ng-include="data.output.url")

@@ -16,6 +16,26 @@ fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);
 });
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+//var $ = require('jquery')
+//var timezoneJS = require('timezone-js');
+
+//timezoneJS.timezone.zoneFileBasePath = '/tz'
+//timezoneJS.timezone.init()
+
 // Populate empty DB with dummy data
 require('./lib/db/dummydata');
 
@@ -37,6 +57,7 @@ app.configure('production', function(){
 
 app.configure(function(){
   app.set('view engine', 'jade');
+  // app.use(allowCrossDomain);
 	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());

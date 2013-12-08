@@ -67,18 +67,22 @@ angular.module('astrosonnetApp')
     $scope.constellations = Constellations
     $scope.planets = ["","","","","","","","","","","",""]
 
+    $scope.getClass = (b) ->
+      return b.toString()
+
 
     $scope.astroSubmit = ->
-      birthDate = new Date(@.data.birthDate)
+      console.log(@.data.timezone)
+      birthDate = moment.tz(new Date(@.data.birthDate), @.data.timezone)
 
       postData = 
-        year: birthDate.getFullYear()
-        month: birthDate.getMonth() + 1
-        day: birthDate.getDate()
-        hour:  birthDate.getHours()
-        minute: birthDate.getMinutes()
-        second: birthDate.getSeconds()
-        timezone: -7.0
+        year: birthDate.year()
+        month: birthDate.month() + 1
+        day: birthDate.date()
+        hour:  birthDate.hours()
+        minute: birthDate.minutes()
+        second: birthDate.seconds()
+        timezone: (birthDate.zone() / 60) * -1
         longitude: parseFloat(@.data.city.primary_longitude)
         latitude: parseFloat(@.data.city.primary_latitude) 
         altitude: 0
@@ -86,7 +90,7 @@ angular.module('astrosonnetApp')
       #scope = @
       $http.post('/api/chart', postData).success (chartData) =>
         ascHouse = 1
-        console.log(chartData)
+        console.dir(chartData)
 
         ascHouse = Math.floor(chartData["Ascendent"].longitude / 30)
         @.constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
@@ -97,18 +101,15 @@ angular.module('astrosonnetApp')
           planets[constNum] or= []
           planets[constNum].push planet
 
+        # TODO: a better way to not have holes
+        planets[i] or= [] for i in [0..11]
+
+        # Reorient
         planets = planets.slice(ascHouse).concat planets.slice(0,ascHouse)
+
         @.planets = planets.map (planetsInHouse) ->
           planetsInHouse.join(', ')
-
-        # TODO: a better way to not have holes
-        @.planets[i] or= "" for i in [0..11]
         
         @.data.output.url = "partials/chart.jade"
-
-    #$scope.$watch 'getAvailableCities', (newValue, oldValue) ->
-
-    #$http.get('/api/awesomeThings').success (awesomeThings) ->
-    #  $scope.awesomeThings = awesomeThings
 
     

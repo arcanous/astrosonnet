@@ -4,6 +4,19 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'bootstrap-chosen/bootstrap-chosen';
 
+.pristine.true, .dirty.true, .invalid.true {
+  background: gray;
+}
+.valid.false {
+  background: red;
+}
+.valid.true {
+  background: green; 
+}
+.error {
+  color: red; 
+}
+
 .selectize-control::before {
     -moz-transition: opacity 0.2s;
     -webkit-transition: opacity 0.2s;
