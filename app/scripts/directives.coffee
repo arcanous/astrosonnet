@@ -5,6 +5,7 @@ angular.module('astrosonnetApp')
       link: (scope, element, attrs) ->
         $(element).on 'change',  (e) ->
           return {} unless e.target.value.length
+          scope.data.timezone = null
           geoService.getCities(e.target.value).then (result) ->
             scope.cities = [city for city in result.data][0]
   }])
