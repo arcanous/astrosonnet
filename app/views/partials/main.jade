@@ -13,7 +13,7 @@ div.main-content
   div.content-area
 
 
-    form(name="astroForm", ng-submit="astroForm.$valid && astroSubmit()")
+    form(name="astroForm", ng-submit="astroForm.$valid && astroAction()")
       legend Birth Details
       .form-group
         label(for='firstName') First Name
@@ -44,7 +44,7 @@ div.main-content
           ng-options="city.name for city in cities", data-placeholder=" Select a city...").form-control
           option(value="")
 
-      button.btn.btn-primary(type='submit') Submit
+      button.btn.btn-primary(submit-button, type='submit') Submit
 
       //-
         table.table

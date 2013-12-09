@@ -20,3 +20,14 @@ angular.module('astrosonnetApp')
         tzService.getTzName(city.primary_latitude, city.primary_longitude).then (result) ->
           scope.data.timezone = result.data.tzid
   }])
+.directive('submitButton', ->
+  # TODO: consider moving this logic to the end of the submit function
+  return {
+      restrict: 'A',
+      link: (scope, element, attrs) ->
+        $(element).on 'click', (e) ->
+          if scope.astroAction is scope.astroSubmit
+            $(e.target).html('Start Over')
+          else
+            $(e.target).html('Submit')
+  })

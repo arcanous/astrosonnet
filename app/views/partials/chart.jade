@@ -5,7 +5,7 @@ div
       td(data-ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]") {{i}}
     tr
       th Constellation
-      td(data-ng-repeat="c in constellations") {{c}}
+      td(data-ng-repeat="c in data.output.constellations") {{c}}
     tr 
       th Planets
-      td(data-ng-repeat="p in planets track by $index") {{p}}
+      td(data-ng-repeat="p in data.output.planets track by $index") {{p}}

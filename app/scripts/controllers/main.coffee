@@ -60,18 +60,27 @@ States =
 angular.module('astrosonnetApp')
   .controller 'MainCtrl', ($scope, $http) ->
 
-    $scope.states = States
-    $scope.data = {}
-    $scope.data.output = {}
+    # Master copy of scope - resets to this, starts at this
+    $scope.master= 
+      output: {}
+  
+    # Initialize scope to master
+    $scope.data = angular.copy($scope.master)
 
-    $scope.constellations = Constellations
-    $scope.planets = ["","","","","","","","","","","",""]
+    # Static data
+    $scope.states = States
 
     $scope.getClass = (b) ->
       return b.toString()
 
+    $scope.astroReset = ->
+      $scope.astroForm.$setPristine()
+      $scope.astroAction = $scope.astroSubmit
+      $scope.data = angular.copy($scope.master)
 
     $scope.astroSubmit = ->
+      $scope.astroAction = $scope.astroReset
+            
       console.log(@.data.timezone)
       birthDate = moment.tz(new Date(@.data.birthDate), @.data.timezone)
 
@@ -93,7 +102,7 @@ angular.module('astrosonnetApp')
         console.dir(chartData)
 
         ascHouse = Math.floor(chartData["Ascendent"].longitude / 30)
-        @.constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
+        @.data.output.constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
 
         planets = []
         for planet, data of chartData
@@ -107,9 +116,12 @@ angular.module('astrosonnetApp')
         # Reorient
         planets = planets.slice(ascHouse).concat planets.slice(0,ascHouse)
 
-        @.planets = planets.map (planetsInHouse) ->
+        @.data.output.planets = planets.map (planetsInHouse) ->
           planetsInHouse.join(', ')
         
         @.data.output.url = "partials/chart.jade"
+
+    # Initial action is to submit
+    $scope.astroAction = $scope.astroSubmit
 
     
