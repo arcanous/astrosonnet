@@ -18,6 +18,17 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    'node-inspector': {
+      custom: {
+        options: {
+          'web-port': 8080,
+          'web-host': 'localhost',
+          'debug-port': 5858 ,
+          'stack-trace-limit': 4,
+          'save-live-edit': true
+        }
+      }
+    },
     // Project settings
     yeoman: {
       // configurable paths
@@ -31,7 +42,8 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: 'server.js'
+          script: 'server.js',
+          debug: true
         }
       },
       prod: {
@@ -466,4 +478,9 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  // Load npm tasks
+  grunt.loadNpmTasks('grunt-node-inspector');
+
 };
+

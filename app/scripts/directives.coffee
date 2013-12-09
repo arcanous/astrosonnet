@@ -17,5 +17,5 @@ angular.module('astrosonnetApp')
 
         city = scope.data.city
         tzService.getTzName(city.primary_latitude, city.primary_longitude).then (result) ->
-          scope.data.timezone = result.data.timeZoneId
+          scope.data.timezone = result.data.tzid
   }])

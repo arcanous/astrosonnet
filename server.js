@@ -71,7 +71,7 @@ var api = require('./lib/controllers/api'),
     controllers = require('./lib/controllers');
 
 // Server Routes
-app.get('/api/awesomeThings', api.awesomeThings);
+app.post('/api/timezone', api.timezone);
 app.post('/api/chart', api.chart);
 
 // Angular Routes

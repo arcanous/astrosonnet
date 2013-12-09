@@ -6,8 +6,9 @@ angular.module('astrosonnetApp')
 )
 .factory('tzService', ($http) ->
   return {getTzName: ((latitude, longitude) ->
-    # All we care about is TZ/Olson name for given location. All other details taken care of moment-timezone js.
-    # Until R-tree approach is implemented
-    return 'America/Los_Angeles')
+    coordinates =
+      longitude: longitude
+      latitude: latitude
+    return $http.post("/api/timezone", coordinates))
     }
 )
