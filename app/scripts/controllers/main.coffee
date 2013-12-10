@@ -102,7 +102,7 @@ angular.module('astrosonnetApp')
         console.dir(chartData)
 
         ascHouse = Math.floor(chartData["Ascendent"].longitude / 30)
-        @.data.output.constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
+        constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
 
         planets = []
         for planet, data of chartData
@@ -116,8 +116,15 @@ angular.module('astrosonnetApp')
         # Reorient
         planets = planets.slice(ascHouse).concat planets.slice(0,ascHouse)
 
-        @.data.output.planets = planets.map (planetsInHouse) ->
+        planets = planets.map (planetsInHouse) ->
           planetsInHouse.join(', ')
+
+        @.data.output.chart = []
+        for i in [0..11]
+          @.data.output.chart[i] =
+            house: i+1
+            constellation: constellations[i]
+            planets: planets[i]
         
         @.data.output.url = "partials/chart.jade"
 
