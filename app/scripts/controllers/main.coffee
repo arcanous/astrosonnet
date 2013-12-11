@@ -101,7 +101,7 @@ angular.module('astrosonnetApp')
         ascHouse = 1
         console.dir(chartData)
 
-        ascHouse = Math.floor(chartData["Ascendent"].longitude / 30)
+        ascHouse = Math.floor(chartData["Ascendant"] / 30)
         constellations = Constellations.slice(ascHouse).concat Constellations.slice(0,ascHouse)
 
         planets = []
@@ -115,6 +115,7 @@ angular.module('astrosonnetApp')
 
         # Reorient
         planets = planets.slice(ascHouse).concat planets.slice(0,ascHouse)
+        planets[0].push "Ascendant"
 
         planets = planets.map (planetsInHouse) ->
           planetsInHouse.join(', ')
